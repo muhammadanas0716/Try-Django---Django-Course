@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+  {% if article_obj %}
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h2 class="h4">Article ID: {{ article_obj.id }}</h2>
+      <h3>{{ article_obj.title }}</h3>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ article_obj.content }}</p>
+    </div>
+  </div>
+  {% else %}
+  <div class="alert alert-warning text-center">
+    <h3>No article found. Please try again.</h3>
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}

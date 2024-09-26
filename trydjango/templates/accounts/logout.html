@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="container my-5">
+  <h2 class="text-center mb-4">Logout</h2>
+
+  <!-- Confirmation Message -->
+  <p class="text-center">Are you sure you want to log out?</p>
+
+  <!-- Display error message if present -->
+  {% if error %}
+  <div class="alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+  {% endif %}
+
+  <form action="{% url 'logout_view' %}" method="POST">
+    {% csrf_token %}
+
+    <!-- Submit Button for Logout -->
+    <button type="submit" class="btn btn-danger w-100">Logout</button>
+  </form>
+</div>
+{% else %}
+<p>You are not logged in.</p>
+{% endif %}
+{% endblock content %}

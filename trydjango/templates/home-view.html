@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+  <!-- Article Details -->
+  <div class="card mb-4">
+    <div class="card-header bg-info text-white">
+      <h1>{{ object.title }} <small class="text-white-50">(ID: {{ object.id }})</small></h1>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ object.content }}</p>
+    </div>
+  </div>
+
+  <!-- List of All Articles -->
+  <h3 class="mb-3">Other Articles</h3>
+  <ul class="list-group">
+    {% for article in all_articles %}
+    <li class="list-group-item">
+      <a href="/articles/{{ article.id }}" class="text-decoration-none">{{ article.id }} - {{ article.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}

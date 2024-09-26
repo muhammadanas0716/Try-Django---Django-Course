@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if not request.user.is_authenticated %}
+<div class="container my-5">
+  <h2 class="text-center mb-4">Sign Up</h2>
+
+  <!-- Display error message if present -->
+  {% if error %}
+  <div class="alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+  {% endif %}
+
+  <form action="." method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+  </form>
+</div>
+{% else %}
+<p>You are already signed up and logged in.</p>
+{% endif %}
+{% endblock content %}

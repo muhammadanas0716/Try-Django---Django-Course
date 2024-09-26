@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="text-center mb-4">Create a New Article</h2>
+  <form action="{% url 'article_create_view' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create Article</button>
+  </form>
+</div>
+{% endblock content %}

@@ -4,14 +4,29 @@ To render HTML web pages
 from django.http import HttpResponse
 import random
 
-def home_view(request):
-  name = "Anas"
-  number = random.randint(10, 1233123)
+from django.shortcuts import render
+
+from articles.models import Article
+
+def home_view(request, *args, **kwargs):
+  number = random.randint(1, 5)
+  article_obj = Article.objects.get(id=number)
+  all_articles = Article.objects.all()
   
-  # Django templates
-  H1_STRING = f"<h1>HELLO {name} - {number}!</h1>"
-  P_STRING = f"<p>Hi {name} - {number}!</p>"
+  context = {
+    "all_articles" : all_articles,
+    "object" : article_obj,
+    "id" : article_obj.id,
+    "title" : article_obj.title,
+    "content" : article_obj.content,
+  }
   
-  HTML_STRING = H1_STRING + P_STRING
+  # NON TEMPLATE(s)
+  # HTML_STRING = """
+  # <h1>{title} - (id: {id})!</h1>
+  # <p>{content}</p>
+  # """.format(**context)
   
-  return HttpResponse(HTML_STRING)
+  print(args, kwargs)
+  
+  return render(request, template_name="home-view.html", context=context)
